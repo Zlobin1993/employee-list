@@ -21,23 +21,39 @@ class App extends Component {
           isIncreased: true,
         },
         {
-          id: 8,
+          id: 2,
           name: 'Sarah B.',
           salary: 3000,
           isIncreased: false,
         },
         {
-          id: 14,
+          id: 3,
           name: 'Max H.',
           salary: 1400,
           isIncreased: false,
         },
       ],
+      nextId: 4,
     }
   }
 
   deleteItem = id => {
     this.setState(({ data }) => ({ data: data.filter(item => item.id !== id) }))
+  }
+
+  addItem = item => {
+    this.setState(({ data, nextId }) => {
+      const newItem = {
+        ...item,
+        id: nextId,
+        isIncreased: false,
+      }
+
+      return {
+        data: [...data, newItem],
+        nextId: nextId + 1,
+      }
+    })
   }
 
   render() {
@@ -53,7 +69,7 @@ class App extends Component {
         </div>
 
         <EmployeesList data={data} onDelete={this.deleteItem} />
-        <EmploeesAddForm />
+        <EmploeesAddForm onAdd={this.addItem} />
       </div>
     );
   }
