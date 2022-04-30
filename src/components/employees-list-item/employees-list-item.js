@@ -25,7 +25,7 @@ class EmployeesListItem extends Component {
   }
 
   render() {
-    const { name, salary } = this.props;
+    const { name, salary, onDelete } = this.props;
     const { isIncreased, isLiked } = this.state;
 
     return (
@@ -45,7 +45,8 @@ class EmployeesListItem extends Component {
           </button>
 
           <button className="btn-trash btn-sm"
-            type="button">
+            type="button"
+            onClick={onDelete}>
             <i className="fas fa-trash"></i>
           </button>
 
