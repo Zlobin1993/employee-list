@@ -90,10 +90,15 @@ class App extends Component {
 
   render() {
     const { data } = this.state;
+    const employeesCount = data.length,
+      employeesWithIncreasedSalary = data.filter(item => item.isIncreased === true).length;
 
     return (
       <div className="app" >
-        <AppInfo />
+        <AppInfo
+          employeesCount={employeesCount}
+          employeesWithIncreasedSalary={employeesWithIncreasedSalary}
+        />
 
         <div className="search-panel">
           <SearchPanel />
