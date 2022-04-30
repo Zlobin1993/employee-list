@@ -45,14 +45,14 @@ class App extends Component {
   }
 
   addItem = item => {
-    this.setState(({ data, nextId }) => {
-      const newItem = {
-        ...item,
-        id: nextId,
-        isIncreased: false,
-        isRised: false,
-      };
+    const newItem = {
+      ...item,
+      id: this.state.nextId,
+      isIncreased: false,
+      isRised: false,
+    };
 
+    this.setState(({ data, nextId }) => {
       return {
         data: [...data, newItem],
         nextId: nextId + 1,
