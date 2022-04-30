@@ -19,18 +19,21 @@ class App extends Component {
           name: 'John A.',
           salary: 800,
           isIncreased: true,
+          isRised: false,
         },
         {
           id: 2,
           name: 'Sarah B.',
           salary: 3000,
           isIncreased: false,
+          isRised: true,
         },
         {
           id: 3,
           name: 'Max H.',
           salary: 1400,
           isIncreased: false,
+          isRised: false,
         },
       ],
       nextId: 4,
@@ -47,13 +50,42 @@ class App extends Component {
         ...item,
         id: nextId,
         isIncreased: false,
-      }
+        isRised: false,
+      };
 
       return {
         data: [...data, newItem],
         nextId: nextId + 1,
       }
     })
+  }
+
+  onToggleIncrease = id => {
+    this.setState(({ data }) => ({
+      data: data.map(item => {
+        if (item.id === id) {
+          return {
+            ...item, isIncreased: !item.isIncreased,
+          };
+        }
+
+        return item;
+      }),
+    }))
+  }
+
+  onToggleRise = id => {
+    this.setState(({ data }) => ({
+      data: data.map(item => {
+        if (item.id === id) {
+          return {
+            ...item, isRised: !item.isRised,
+          };
+        }
+
+        return item;
+      }),
+    }))
   }
 
   render() {
@@ -68,7 +100,12 @@ class App extends Component {
           <AppFilter />
         </div>
 
-        <EmployeesList data={data} onDelete={this.deleteItem} />
+        <EmployeesList
+          data={data}
+          onDelete={this.deleteItem}
+          onToggleIncrease={this.onToggleIncrease}
+          onToggleRise={this.onToggleRise} />
+
         <EmploeesAddForm onAdd={this.addItem} />
       </div>
     );
