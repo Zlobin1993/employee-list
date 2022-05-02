@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import styled from 'styled-components';
 
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
@@ -6,7 +7,10 @@ import AppFilter from '../app-filter/app-filter';
 import EmployeesList from '../employees-list/employees-list';
 import EmploeesAddForm from '../employees-add-form/employees-add-form';
 
-import './app.scss';
+const AppBlock = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+`;
 
 class App extends Component {
   constructor(props) {
@@ -128,7 +132,7 @@ class App extends Component {
       filteredData = this.filterByName(this.searchByTerm(data, searchTerm), activeFilterName);
 
     return (
-      <div className="app">
+      <AppBlock>
         <AppInfo
           employeesCount={employeesCount}
           employeesWithIncreasedSalary={employeesWithIncreasedSalary}
@@ -149,7 +153,7 @@ class App extends Component {
           onToggleProp={this.onToggleProp} />
 
         <EmploeesAddForm onAdd={this.addItem} />
-      </div>
+      </AppBlock>
     );
   }
 }
