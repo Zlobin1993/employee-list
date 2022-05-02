@@ -44,12 +44,12 @@ class App extends Component {
           label: 'Все сотрудники',
         },
         {
-          name: 'increase',
-          label: 'На повышение',
+          name: 'rise',
+          label: 'Повысить',
         },
         {
-          name: 'salary',
-          label: 'З/П больше 1000$',
+          name: 'increase',
+          label: 'Увеличить заработную плату',
         },
       ],
       activeFilterName: 'default',
@@ -114,8 +114,8 @@ class App extends Component {
     switch (type) {
       case 'increase':
         return items.filter(item => (item.isIncreased));
-      case 'salary':
-        return items.filter(item => (item.salary > 1000));
+      case 'rise':
+        return items.filter(item => (item.isRised));
       default:
         return items;
     }

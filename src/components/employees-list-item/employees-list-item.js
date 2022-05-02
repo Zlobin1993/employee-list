@@ -4,17 +4,23 @@ const EmployeesListItem = props => {
   const { name, salary, isIncreased, isRised, onDelete, onToggleProp } = props;
 
   return (
-    <li className={"list-group-item d-flex justify-content-between" + (isIncreased ? ' increase' : '') + (isRised ? ' like' : '')}>
-      <span className="list-group-item-label"
-        data-toggle="isRised"
-        onClick={onToggleProp}>{name}</span>
+    <li className="list-group-item d-flex justify-content-between">
+      <span className="list-group-item-label">{name}</span>
 
       <input className="list-group-item-input"
         type="text"
+        readOnly
         defaultValue={salary + '$'} />
 
       <div className="d-flex justify-content-center align-items-center">
-        <button className="btn-cookie btn-sm"
+        <button className={"btn-star btn-sm" + (isRised ? ' bg-success' : '')}
+          type="button"
+          data-toggle="isRised"
+          onClick={onToggleProp}>
+          <i className="fas fa-star"></i>
+        </button>
+
+        <button className={"btn-cookie btn-sm" + (isIncreased ? ' bg-success' : '')}
           type="button"
           data-toggle="isIncreased"
           onClick={onToggleProp}>
@@ -26,8 +32,6 @@ const EmployeesListItem = props => {
           onClick={onDelete}>
           <i className="fas fa-trash"></i>
         </button>
-
-        <i className="fas fa-star"></i>
       </div>
     </li>
   );
