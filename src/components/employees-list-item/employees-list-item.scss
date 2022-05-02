@@ -1,6 +1,8 @@
+@import "../../assets/styles/variables.scss";
+
 .list-group-item {
     padding: 15px 20px;
-    border-bottom: 1px solid #3d5a80;
+    border-bottom: 1px solid $color-main;
 
     &:last-child {
         border-bottom: none;
@@ -28,15 +30,15 @@
         cursor: pointer;
 
         &.btn-star {
-            color: #ffd700;
+            color: $color-icon-star;
         }
 
         &.btn-cookie {
-            color: #e09f3e;
+            color: $color-icon-cookie;
         }
 
         &.btn-trash {
-            color: #e5383b;
+            color: $color-icon-trash;
         }
     }
 }

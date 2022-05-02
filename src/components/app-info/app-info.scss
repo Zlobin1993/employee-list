@@ -1,7 +1,9 @@
+@import "../../assets/styles/variables.scss";
+
 .app-info {
     padding: 25px;
-    color: #FFF;
-    background-color: #3D5A80;
+    color: $color-white;
+    background-color: $color-main;
     border-radius: 4px;
-    box-shadow: 15px 15px 30px rgba(0, 0, 0, .15);
+    box-shadow: 15px 15px 30px rgba($color-black, 0.15);
 }

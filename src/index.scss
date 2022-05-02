@@ -1,0 +1,12 @@
+@import "./assets/styles/variables.scss";
+
+body {
+  margin: 50px 0;
+  font-family: $font-default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: $font-code;
+}
