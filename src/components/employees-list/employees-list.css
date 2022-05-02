@@ -1,7 +1,16 @@
 .app-list {
     margin-top: 30px;
-    background-color: #3d5a80;
     border-radius: 4px;
     box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.app-list .list-group {
     color: #fff;
+    background-color: #3d5a80;
+}
+
+.app-list .empty-list-message {
+    margin: 0;
+    padding: 15px 20px;
+    text-align: center;
 }

@@ -38,12 +38,21 @@ class App extends Component {
       ],
       nextId: 4,
       searchTerm: '',
-      filters: {
-        'default': 'Все сотрудники',
-        'increase': 'На повышение',
-        'salary': 'З/П больше 1000$',
-      },
-      activeFilterType: 'default',
+      filters: [
+        {
+          name: 'default',
+          label: 'Все сотрудники',
+        },
+        {
+          name: 'increase',
+          label: 'На повышение',
+        },
+        {
+          name: 'salary',
+          label: 'З/П больше 1000$',
+        },
+      ],
+      activeFilterName: 'default',
     }
   }
 
@@ -95,11 +104,13 @@ class App extends Component {
     });
   }
 
-  onFilterUpdate = filterType => {
-    this.setState({ activeFilterType: filterType });
+  onFilterUpdate = event => {
+    const filterName = event.currentTarget.getAttribute('data-filter');
+
+    this.setState({ activeFilterName: filterName });
   }
 
-  filterByType = (items, type) => {
+  filterByName = (items, type) => {
     switch (type) {
       case 'increase':
         return items.filter(item => (item.isIncreased));
@@ -111,10 +122,10 @@ class App extends Component {
   }
 
   render() {
-    const { data, searchTerm, filters, activeFilterType } = this.state;
+    const { data, searchTerm, filters, activeFilterName } = this.state;
     const employeesCount = data.length,
       employeesWithIncreasedSalary = data.filter(item => item.isIncreased === true).length,
-      filteredData = this.filterByType(this.searchByTerm(data, searchTerm), activeFilterType);
+      filteredData = this.filterByName(this.searchByTerm(data, searchTerm), activeFilterName);
 
     return (
       <div className="app">
@@ -128,7 +139,7 @@ class App extends Component {
 
           <AppFilter
             filters={filters}
-            activeFilterType={activeFilterType}
+            activeFilterName={activeFilterName}
             onFilterUpdate={this.onFilterUpdate} />
         </div>
 

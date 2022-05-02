@@ -1,49 +1,24 @@
-import { Component } from 'react';
-
 import './app-filter.css';
 
-class AppFilter extends Component {
-  constructor(props) {
-    super(props);
+const AppFilter = ({ filters, activeFilterName, onFilterUpdate }) => {
+  const buttonList = filters.map((filter, index) => (
+    <button className={'btn ' + (filter.name === activeFilterName ? 'btn-light' : 'btn-outline-light')}
+      type="button"
+      data-filter={filter.name}
+      key={index}
+      onClick={onFilterUpdate}
+    >
+      {filter.label}
+    </button>
+  ));
 
-    this.state = {
-      filters: this.props.filters,
-      activeFilterType: this.props.activeFilterType,
-    };
-  }
+  if (!buttonList.length) return;
 
-  onFilterUpdate = event => {
-    const filterType = event.currentTarget.getAttribute('data-filter');
-
-    this.setState({ activeFilterType: filterType });
-    this.props.onFilterUpdate(filterType);
-  }
-
-  render() {
-    const { filters, activeFilterType } = this.state;
-    const buttonList = [];
-
-    for (const key in filters) {
-      const button = (
-        <button className={'btn ' + (key === activeFilterType ? 'btn-light' : 'btn-outline-light')}
-          type="button"
-          data-filter={key}
-          key={key}
-          onClick={this.onFilterUpdate}
-        >
-          {filters[key]}
-        </button>
-      );
-
-      buttonList.push(button);
-    }
-
-    return (
-      <div className="btn-group">
-        {buttonList}
-      </div>
-    );
-  }
+  return (
+    <div className="btn-group">
+      {buttonList}
+    </div>
+  );
 }
 
 export default AppFilter;
