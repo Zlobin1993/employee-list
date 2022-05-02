@@ -38,6 +38,12 @@ class App extends Component {
       ],
       nextId: 4,
       searchTerm: '',
+      filters: {
+        'default': 'Все сотрудники',
+        'increase': 'На повышение',
+        'salary': 'З/П больше 1000$',
+      },
+      activeFilterType: 'default',
     }
   }
 
@@ -80,9 +86,7 @@ class App extends Component {
       return items;
     }
 
-    return items.filter(item => {
-      return item.name.toLowerCase().indexOf(term.toLowerCase()) > -1;
-    });
+    return items.filter(item => (item.name.toLowerCase().indexOf(term.toLowerCase()) > -1));
   }
 
   onUpdateSearch = term => {
@@ -91,11 +95,26 @@ class App extends Component {
     });
   }
 
+  onFilterUpdate = filterType => {
+    this.setState({ activeFilterType: filterType });
+  }
+
+  filterByType = (items, type) => {
+    switch (type) {
+      case 'increase':
+        return items.filter(item => (item.isIncreased));
+      case 'salary':
+        return items.filter(item => (item.salary > 1000));
+      default:
+        return items;
+    }
+  }
+
   render() {
-    const { data, searchTerm } = this.state;
+    const { data, searchTerm, filters, activeFilterType } = this.state;
     const employeesCount = data.length,
       employeesWithIncreasedSalary = data.filter(item => item.isIncreased === true).length,
-      filteredData = this.searchByTerm(data, searchTerm);
+      filteredData = this.filterByType(this.searchByTerm(data, searchTerm), activeFilterType);
 
     return (
       <div className="app">
@@ -106,7 +125,11 @@ class App extends Component {
 
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter />
+
+          <AppFilter
+            filters={filters}
+            activeFilterType={activeFilterType}
+            onFilterUpdate={this.onFilterUpdate} />
         </div>
 
         <EmployeesList
