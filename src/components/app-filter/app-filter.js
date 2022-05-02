@@ -1,4 +1,4 @@
-import './app-filter.css';
+import './app-filter.scss';
 
 const AppFilter = ({ filters, activeFilterName, onFilterUpdate }) => {
   const buttonList = filters.map((filter, index) => (
